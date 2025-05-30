@@ -1,0 +1,1 @@
+﻿Schreibe Unit-Tests für die Klasse Calculator.cs. Schließe Grenzfälle mit ein und beachte ebenfalls, dass bestimmte Werte zu Exceptions führen können. Benutze xunit als testframework
