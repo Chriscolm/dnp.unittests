@@ -8,20 +8,20 @@ namespace Dnp.Unittests.NUnitTests.Services;
 public class GreetingServiceTests
 {
     private IGreetingService greetingService = null!;    
-    private Mock<TimeProvider> timeProvider = new();
+    private readonly Mock<TimeProvider> timeProvider = new();
 
     [SetUp]
     public void Setup()
     {
         var userService = new Mock<IUserService>();
-        userService.Setup(u => u.GetCurrentUser()).Returns(new User(Guid.NewGuid(), "Christian"));
+        userService.Setup(u => u.GetCurrentUser()).Returns(new User(Guid.NewGuid(), "Christian"));        
         greetingService = new GreetingService(userService.Object, timeProvider.Object);
     }
 
     [Test]
     public void ReturnsGreetingWithName()
     {
-        var result = greetingService.SayHello();
+        var result = greetingService.SayHello();        
 
         Assert.That(result, Does.Contain("Christian"));
     }
