@@ -6,6 +6,24 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="chatgpt-prompt.nunit.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="chatgpt-prompt.nunit.txt" />
+    <Content Include="copilot-prompt.xunit.txt" />
+    <Content Include="mscopilot-prompt.mstest.txt" />
+  </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="System.IO.Abstractions" Version="22.0.14" />
   </ItemGroup>

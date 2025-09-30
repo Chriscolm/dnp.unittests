@@ -1,58 +1,87 @@
 ﻿namespace Dnp.Unittests.MSTestTests;
 
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+
+
 [TestClass]
 public class CalculatorTests
 {
-    private Calculator _calculator;
+    private ICalculator calculator;
 
     [TestInitialize]
     public void Setup()
     {
-        _calculator = new Calculator();
+        calculator = new Calculator();
     }
 
-    [DataTestMethod]
-    [DataRow(1, 2, 3)]
-    [DataRow(-1, -2, -3)]
-    [DataRow(int.MaxValue, 0, int.MaxValue)]
-    [DataRow(int.MinValue, 0, int.MinValue)]
-    public void Add_ReturnsExpectedResult(int a, int b, int expected)
+    // --- Add ---
+    [TestMethod]
+    public void Add_ShouldReturnCorrectSum()
     {
-        Assert.AreEqual(expected, _calculator.Add(a, b));
-    }
-
-    [DataTestMethod]
-    [DataRow(5, 3, 2)]
-    [DataRow(-5, -3, -2)]
-    [DataRow(int.MaxValue, 1, int.MaxValue - 1)]
-    [DataRow(int.MinValue, 1, int.MinValue + 1)]
-    public void Subtract_ReturnsExpectedResult(int a, int b, int expected)
-    {
-        Assert.AreEqual(expected, _calculator.Subtract(a, b));
-    }
-
-    [DataTestMethod]
-    [DataRow(2, 3, 6)]
-    [DataRow(-2, 3, -6)]
-    [DataRow(0, 100, 0)]
-    [DataRow(int.MaxValue, 1, int.MaxValue)]
-    public void Multiply_ReturnsExpectedResult(int a, int b, int expected)
-    {
-        Assert.AreEqual(expected, _calculator.Multiply(a, b));
-    }
-
-    [DataTestMethod]
-    [DataRow(6, 3, 2)]
-    [DataRow(-6, 3, -2)]
-    [DataRow(0, 1, 0)]
-    public void Divide_ReturnsExpectedResult(int a, int b, int expected)
-    {
-        Assert.AreEqual(expected, _calculator.Divide(a, b));
+        Assert.AreEqual(5, calculator.Add(2, 3));
     }
 
     [TestMethod]
-    public void Divide_ByZero_ThrowsDivideByZeroException()
+    public void Add_WithMaxInt_ShouldThrowOverflowException()
     {
-        Assert.ThrowsException<DivideByZeroException>(() => _calculator.Divide(1, 0));
+        Assert.ThrowsException<OverflowException>(() => calculator.Add(int.MaxValue, 1));
+    }
+
+    [TestMethod]
+    public void Add_WithMinInt_ShouldReturnCorrectResult()
+    {
+        Assert.AreEqual(-1, calculator.Add(int.MinValue, int.MaxValue));
+    }
+
+    // --- Subtract ---
+    [TestMethod]
+    public void Subtract_ShouldReturnCorrectDifference()
+    {
+        Assert.AreEqual(1, calculator.Subtract(4, 3));
+    }
+
+    [TestMethod]
+    public void Subtract_WithMinInt_ShouldThrowOverflowException()
+    {
+        Assert.ThrowsException<OverflowException>(() => calculator.Subtract(int.MinValue, 1));
+    }
+
+    // --- Multiply ---
+    [TestMethod]
+    public void Multiply_ShouldReturnCorrectProduct()
+    {
+        Assert.AreEqual(6, calculator.Multiply(2, 3));
+    }
+
+    [TestMethod]
+    public void Multiply_WithOverflow_ShouldThrowOverflowException()
+    {
+        Assert.ThrowsException<OverflowException>(() => calculator.Multiply(int.MaxValue, 2));
+    }
+
+    [TestMethod]
+    public void Multiply_WithZero_ShouldReturnZero()
+    {
+        Assert.AreEqual(0, calculator.Multiply(0, int.MaxValue));
+    }
+
+    // --- Divide ---
+    [TestMethod]
+    public void Divide_ShouldReturnCorrectQuotient()
+    {
+        Assert.AreEqual(2, calculator.Divide(6, 3));
+    }
+
+    [TestMethod]
+    public void Divide_ByZero_ShouldThrowDivideByZeroException()
+    {
+        Assert.ThrowsException<DivideByZeroException>(() => calculator.Divide(5, 0));
+    }
+
+    [TestMethod]
+    public void Divide_MinIntByMinusOne_ShouldThrowOverflowException()
+    {
+        Assert.ThrowsException<OverflowException>(() => calculator.Divide(int.MinValue, -1));
     }
 }

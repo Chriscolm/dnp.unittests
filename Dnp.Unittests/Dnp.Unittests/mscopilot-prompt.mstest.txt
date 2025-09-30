@@ -1,0 +1,3 @@
+﻿Schreibe Unit-Tests für die Klasse Calculator.cs, die die Schnittstelle ICalculator.cs implementiert. Schließe Grenzfälle mit ein und beachte ebenfalls, dass bestimmte Werte zu Ausnahmen führen können. 
+Beachte ebenso die Wertebereiche einer 32-bit-Ganzzahl. Leite die Test-Methoden-Namen von den Methodennamen der Schnittstelle ab.
+Benutze mstest, Version ^3.6, als Testframework. Und dies ist die Schnittstelle:
