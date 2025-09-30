@@ -4,17 +4,16 @@ using Moq;
 
 namespace Dnp.Unittests.XUnitTests.Services;
 
-public class UglyGreetingServiceTests : IDisposable
+public class BadGreetingServiceTests : IDisposable
 {
-
     private IGreetingService greetingService = null!;
 
-    public UglyGreetingServiceTests()
+    public BadGreetingServiceTests()
     {
         // https://xunit.net/docs/shared-context
         var userService = new Mock<IUserService>();
         userService.Setup(u => u.GetCurrentUser()).Returns(new User(Guid.NewGuid(), "Christian"));
-        greetingService = new UglyGreetingService(userService.Object);
+        greetingService = new BadGreetingService(userService.Object);
     }
 
     [Fact]

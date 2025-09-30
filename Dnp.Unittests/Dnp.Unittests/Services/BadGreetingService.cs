@@ -2,7 +2,7 @@
 
 namespace Dnp.Unittests.Services;
 
-public class BadGreetingService : IGreetingService
+public class BadGreetingService(IUserService userService) : IGreetingService
 {
     public string SayHello()
     {
@@ -11,9 +11,9 @@ public class BadGreetingService : IGreetingService
         return $"{greeting} {user.Name}";
     }
 
-    private static User GetUser()
+    private User GetUser()
     {
-        return new UserService().GetCurrentUser();
+        return userService.GetCurrentUser();
     }
 
     private static string GetGreeting()

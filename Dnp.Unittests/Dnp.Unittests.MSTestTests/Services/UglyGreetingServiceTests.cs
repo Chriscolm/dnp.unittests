@@ -3,14 +3,14 @@
 namespace Dnp.Unittests.MSTestTests.Services;
 
 [TestClass]
-public class BadGreetingServiceTests
+public class UglyGreetingServiceTests
 {
     private IGreetingService greetingService = null!;
 
     [TestInitialize]
     public void Setup()
     {
-        greetingService = new BadGreetingService();
+        greetingService = new UglyGreetingService();
     }
 
     [TestMethod]
